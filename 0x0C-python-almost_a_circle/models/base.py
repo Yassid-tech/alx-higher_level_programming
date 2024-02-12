@@ -19,7 +19,7 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         """Make a dictionary as JSON so it's quite rightly and longer."""
-        if list_dictionaries is NOne or not list_dictionaries:
+        if list_dictionaries is None or not list_dictionaries:
             return "[]"
         else:
             return dumps(list_dictionaries)
@@ -32,7 +32,7 @@ class Base:
         return loads(json_string)
 
     @classmethod
-    def save_to_file(clas, list_objs):
+    def save_to_file(cls, list_objs):
         """Save the JSON file to object."""
         if list_objs is not None:
             list_objs = [o.to_dictionary() for o in list_objs]
@@ -50,13 +50,13 @@ class Base:
             return [cls.create(**d) for d in cls.from_json_string(f.read())]
 
     @classmethod
-    def create(clas, **dictionary):
+    def create(cls, **dictionary):
         """Loads instance from dictionary."""
         from models.rectangle import Rectangle
         from models.square import Square
         if cls is Rectangle:
             new = Rectangle(1, 1)
-        elif clas is Square:
+        elif cls is Square:
             new = Square(1)
         else:
             new = None
